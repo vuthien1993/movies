@@ -1,3 +1,5 @@
+//component hiển thị icon
+
 import React from "react";
 function CartIcon() {
   return (

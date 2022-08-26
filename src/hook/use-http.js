@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const useHttp = (requestConfig) => {
+  //khai báo và gán giá trị ban đầu cho các state
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState(null);
   const [data, setData] = useState({
@@ -41,6 +42,7 @@ const useHttp = (requestConfig) => {
       setHttpError(error.message);
     });
   }, [requestConfig.url]);
+  //trả về obj chứa các giá trị cần dùng
   return {
     isLoading,
     httpError,

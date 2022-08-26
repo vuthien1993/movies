@@ -28,7 +28,7 @@ const useHttpId = (requestConfig) => {
 
       //nen loi khi xu ly ko thanh cong
       if (!reponse.ok) {
-        throw new Error(reponse);
+        throw new Error("Error");
       }
       const data = await reponse.json();
       setData(data);

@@ -11,3 +11,7 @@
 .textAlign {
   text-align: justify;
 }
+.col-md-6 img {
+  width: 100%;
+  height: auto;
+}

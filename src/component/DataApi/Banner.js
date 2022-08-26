@@ -13,6 +13,7 @@ import NavBar from "../Layout/NavBar";
 import "./Banner.css";
 
 function Banner() {
+  //khai báo gán giá trị api khác nhau vào biến
   const requests = {
     fetchTrending: `/trending/all/week?api_key=522dfba9d04a6622db8e00a4a63e9dfb&language=en-US`,
     fetchNetflixOriginals: `/discover/tv?api_key=522dfba9d04a6622db8e00a4a63e9dfb&with_network=123`,
@@ -24,10 +25,11 @@ function Banner() {
     fetchDocumentaries: `/discover/movie?api_key=522dfba9d04a6622db8e00a4a63e9dfb&with_genres=99`,
     fetchSearch: `/search/movie?api_key=522dfba9d04a6622db8e00a4a63e9dfb&language=en-US`,
   };
-
+  //khai báo sử dụng custom hook useHttp để gọi api
   const { isLoading, httpError, data } = useHttp({
     url: `https://api.themoviedb.org/3${requests.fetchNetflixOriginals}`,
   });
+  //kiểm tra nếu đang thực hiện gửi lệnh đến api thì in ra Loading
   if (isLoading) {
     return (
       <section>
@@ -35,6 +37,7 @@ function Banner() {
       </section>
     );
   }
+  //nếu api lổi thì báo lổi ra màn hình
   if (httpError) {
     return (
       <section>
@@ -42,6 +45,7 @@ function Banner() {
       </section>
     );
   }
+  // tạo index ngẫu nhiên
   const index = Math.floor(Math.random() * data.results.length);
 
   return (
@@ -55,6 +59,7 @@ function Banner() {
             <button className="button2">Mylist</button>
           </div>
           <p className="p1Banner">{data.results[index].overview}</p>
+          {/* render img ra giao diện người dùng */}
           <div>
             <img
               src={`https://image.tmdb.org/t/p/w500/${data.results[index].backdrop_path}`}
@@ -62,6 +67,7 @@ function Banner() {
             />
           </div>
         </div>
+        {/* import các component khác và ht nội dụng ra giao diện người dùng */}
         <Original dataApi={requests} />
         <Trending dataTrending={requests} />
         <TopRated dataTopRated={requests} />

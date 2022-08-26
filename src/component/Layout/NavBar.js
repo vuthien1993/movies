@@ -6,9 +6,10 @@ import "./NavBar.css";
 import "bootstrap/dist/css/bootstrap.css";
 function NavBar() {
   const [changeColor, setChangeColor] = useState(false);
+  //sử dụng useEffect thây đổi màu cho navbar khi cuộn xuống quá 100px
   useEffect(() => {
     const changeColorHandler = () => {
-      //console.log(window.scrollY);
+      //kiểm tra nếu >100px thì set lại giá trị vào state
       if (window.scrollY >= 100) {
         setChangeColor(true);
       } else {
@@ -22,6 +23,7 @@ function NavBar() {
       <div className={`borderTotal sticky ${changeColor && "background"}`}>
         <div className="borderNavbar">
           <div className="fll">
+            {/* điều hướng trang khi nhấn vào icon vs movie app */}
             <p>
               <Link to="/" className="link textNone">
                 Movie App
