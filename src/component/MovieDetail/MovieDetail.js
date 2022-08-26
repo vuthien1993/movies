@@ -14,7 +14,7 @@ function MovieDetail(props) {
     },
   };
   //su dung custom hook call api
-  const { isLoading, httpError, data } = useHttpId({
+  const { data } = useHttpId({
     url: `https://api.themoviedb.org/3/movie/${props.dataMoviesDetail.id}/videos?api_key=522dfba9d04a6622db8e00a4a63e9dfb&language=en-US`,
   });
   // loc phan tu phu hop trong mang
@@ -57,6 +57,7 @@ function MovieDetail(props) {
             {dataFilter.length === 0 ? (
               <div>
                 <img
+                  style={{ height: "auto" }}
                   src={`https://image.tmdb.org/t/p/w500/${props.dataMoviesDetail.backdrop_path}`}
                   alt="No Img"
                 />

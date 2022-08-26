@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import useHttp from "../../hook/use-http";
-import OwlCarousel from "react-owl-carousel";
+import useCarousel from "../../hook/use-carousel";
+import MovieDetail from "../MovieDetail/MovieDetail";
+import AliceCarousel from "react-alice-carousel";
 
-//import MovieDetail from "../MovieDetail/MovieDetail";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
-
+import "react-alice-carousel/lib/alice-carousel.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Original.css";
 
 function TopRated(prpos) {
-  const [id, setId] = useState("");
+  //su dung custom hook call api
   const { isLoading, httpError, data } = useHttp({
     url: `https://api.themoviedb.org/3${prpos.dataTopRated.fetchTopRated}`,
   });
+  const dataTopRated = data.results;
+  //su dung custom hook de dinh dang hien thi va xu ly su kien khi click
+  const { dataClick, responsive, items } = useCarousel(dataTopRated);
   if (isLoading) {
     return (
       <section>
@@ -29,27 +31,18 @@ function TopRated(prpos) {
       </section>
     );
   }
-  // const dataClick = { id: id };
-  const dataTopRated = data.results;
   return (
     <div className="borderOriginal">
       <p>Xếp hạng cao</p>
       <div className="container-fluid">
-        <OwlCarousel items={10} className="owl-theme" loop nav margin={12}>
-          {dataTopRated.map((ele, i) => {
-            return (
-              <img
-                onClick={() => {
-                  setId(ele.id);
-                }}
-                key={i}
-                src={`https://image.tmdb.org/t/p/w500/${ele.backdrop_path}`}
-                alt="Error Img"
-              />
-            );
-          })}
-        </OwlCarousel>
-        {/* <MovieDetail dataMoviesDetail={dataClick} /> */}
+        <AliceCarousel
+          mouseTracking
+          items={items}
+          responsive={responsive}
+          controlsStrategy="alternate"
+          disableDotsControls
+        />
+        <MovieDetail dataMoviesDetail={dataClick} />
       </div>
     </div>
   );

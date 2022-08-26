@@ -12,7 +12,7 @@ function DetailSearch(props) {
     },
   };
   //su dung custom hook call api
-  const { isLoading, httpError, data } = useHttpId({
+  const { data } = useHttpId({
     url: `https://api.themoviedb.org/3/movie/${props.dataDetailSearch.id}/videos?api_key=522dfba9d04a6622db8e00a4a63e9dfb&language=en-US`,
   });
   // loc phan tu phu hop trong mang
